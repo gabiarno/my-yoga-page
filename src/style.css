@@ -1,0 +1,64 @@
+h1 {
+  color: rgb(211, 130, 41);
+  font-size: 3.5em;
+  font-weight: bold;
+  text-align: center;
+}
+h2 {
+  color: rgb(211, 130, 41);
+  font-size: 2.5em;
+  font-weight: bold;
+}
+h3 {
+  color: rgb(211, 130, 41);
+  font-size: 1.5em;
+  font-style: italic;
+}
+body {
+  background-color: rgb(253, 253, 229);
+  font-family: fantasy;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+#content {
+  width: 90%;
+  margin: 20px;
+}
+a {
+  text-decoration: none;
+}
+.web-img {
+  margin: auto;
+  display: block;
+}
+
+p a{
+  text-align: center;
+}
+#yoga-intro {
+  background-color: rgb(254, 249, 138);
+}
+.par {
+  background-color: rgb(255, 238, 107);
+  width: 80%;
+  margin: 15px;
+  border: 4px solid rgb(245, 247, 176);
+  padding: 15px;
+}
+.impar {
+  background-color: #e69922;
+  width: 80%;
+  margin: 5%;
+  margin-left: 20%;
+  border: 4px solid rgb(194, 90, 0);
+  padding: 15px;
+}
+#footer {
+  background-color: rgb(232, 232, 232);
+  margin-top: 5%;
+  padding: 10px;
+  clear: both;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
