@@ -10,10 +10,11 @@ const MODEL_URL =
 
 export type FrameHandler = (points: Point[] | null, aspect: number, now: number) => void;
 
+// Tonos claros de la paleta salvia/ámbar: contrastan sobre cualquier vídeo.
 const COLORS: Record<CoachState, string> = {
   unknown: 'rgba(255, 255, 255, 0.85)',
-  ok: 'rgba(76, 201, 128, 0.95)',
-  adjust: 'rgba(255, 160, 60, 0.95)',
+  ok: 'rgba(181, 202, 160, 0.95)',
+  adjust: 'rgba(237, 190, 123, 0.95)',
 };
 
 // Conexiones del esqueleto sin la cara, que aquí solo añadiría ruido visual.
