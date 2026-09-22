@@ -1,5 +1,19 @@
 @import url('../styles/theme.css');
 
+:root {
+  --ok: #377448;
+  --warn: #94601e;
+  --danger: #a23e35;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ok: #a2cf9b;
+    --warn: #edbe7b;
+    --danger: #f4aaa1;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -27,49 +41,93 @@ body {
 h1,
 h2 {
   margin: 0 0 8px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 h1 {
-  font-size: 1.8rem;
-  color: var(--accent);
+  font: 500 clamp(2rem, 5vw, 3.2rem) / 1.15 var(--serif);
+  color: var(--text);
+  letter-spacing: -0.035em;
 }
 
 h2 {
   font-size: 1.1rem;
 }
 
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+
 .hint {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
   margin: 4px 0 10px;
 }
 
 /* ── Configuración ─────────────────────────────── */
 
+#setup {
+  max-width: 980px;
+  padding-top: 28px;
+}
+
 .top {
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 }
 
 .back {
+  display: inline-block;
+  padding: 8px 0;
   color: var(--muted);
   text-decoration: none;
   font-size: 0.95rem;
 }
 
-.stats {
+.setup-eyebrow {
+  margin: 30px 0 12px;
+}
+
+.setup-intro {
   color: var(--muted);
+  margin: 14px 0;
+}
+
+.stats {
+  color: var(--accent);
+  font-size: 0.875rem;
   margin: 0;
   min-height: 1.4em;
+}
+
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px;
-  margin-bottom: 14px;
+  padding: 24px;
+  min-width: 0;
+}
+
+.card h2 {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.card-number {
+  font: italic 1.2rem var(--serif);
+  color: var(--accent);
+  margin-right: 8px;
 }
 
 .chips {
@@ -82,6 +140,7 @@ button,
 .button {
   font: inherit;
   cursor: pointer;
+  min-height: 44px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -104,10 +163,20 @@ button:disabled {
   cursor: default;
 }
 
+.chips button {
+  padding: 10px 15px;
+  font-size: 0.875rem;
+}
+
+.chips button:hover {
+  border-color: var(--accent);
+}
+
 .chips button[aria-pressed='true'] {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--accent);
 }
 
 .primary {
@@ -138,9 +207,9 @@ button:disabled {
 
 .big {
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 16px;
-  margin-top: 6px;
+  margin-top: 20px;
 }
 
 .switch {
@@ -148,9 +217,12 @@ button:disabled {
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
 }
 
 .switch input {
+  flex-shrink: 0;
   width: 20px;
   height: 20px;
   accent-color: var(--accent);
@@ -160,11 +232,13 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 12px 0;
+  font-size: 0.875rem;
+  margin: 20px 0 12px;
 }
 
 .range input {
   flex: 1;
+  min-width: 0;
   accent-color: var(--accent);
 }
 
@@ -176,11 +250,13 @@ button:disabled {
 select {
   font: inherit;
   width: 100%;
+  min-height: 44px;
   padding: 9px 12px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
+  text-overflow: ellipsis;
 }
 
 details summary {
@@ -188,11 +264,21 @@ details summary {
   color: var(--accent);
 }
 
+.class-overview {
+  margin-top: 20px;
+  background: var(--sage-soft);
+}
+
+.class-overview h2 {
+  font: 1.5rem var(--serif);
+  margin-bottom: 10px;
+}
+
 .preview {
   margin: 8px 0 0;
   padding-left: 22px;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 
 .preview .block {
@@ -220,6 +306,14 @@ details summary {
 
 /* ── Cámara ─────────────────────────────────────── */
 
+#framing {
+  padding-top: 40px;
+}
+
+#framing h2 {
+  font: 500 2rem var(--serif);
+}
+
 .stage {
   position: relative;
   width: 100%;
@@ -240,24 +334,26 @@ details summary {
   transform: scaleX(-1);
 }
 
+/* Sobre el vídeo: colores fijos, independientes del tema. */
 .stage-badge {
   position: absolute;
-  left: 10px;
-  top: 10px;
-  padding: 5px 12px;
+  left: 12px;
+  top: 12px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  background: rgba(0, 0, 0, 0.55);
-  color: var(--on-accent);
+  background: rgb(23 30 25 / 65%);
+  color: #fff;
+  backdrop-filter: blur(6px);
 }
 
 .stage-badge.ok {
-  background: rgba(63, 165, 107, 0.9);
+  background: rgb(76 102 70 / 92%);
 }
 
 .stage-badge.adjust {
-  background: rgba(224, 138, 46, 0.92);
+  background: rgb(148 96 30 / 92%);
 }
 
 .status {
@@ -275,11 +371,12 @@ details summary {
 
 #practice.screen {
   max-width: 1100px;
+  padding-top: 24px;
 }
 
 .practice {
   display: grid;
-  gap: 16px;
+  gap: 20px;
 }
 
 .practice.with-camera {
@@ -293,50 +390,55 @@ details summary {
   }
 }
 
+/* La tarjeta de la postura repite el arco de la portada. */
 .pose-card {
-  background: var(--surface);
+  max-width: 520px;
+  width: 100%;
+  justify-self: center;
+  background: var(--sage-soft);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px;
+  border-radius: 240px 240px 24px 24px;
+  padding: 56px 28px 28px;
   text-align: center;
 }
 
+.with-camera .pose-card {
+  max-width: none;
+  border-radius: 160px 160px 24px 24px;
+  padding-top: 44px;
+}
+
 .block-label {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.78rem;
-  color: var(--accent);
-  margin: 0 0 4px;
-  font-weight: 700;
+  margin-bottom: 12px;
 }
 
 .pose-card h2 {
-  font-size: 1.7rem;
+  font: 500 2.2rem / 1.15 var(--serif);
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
 .sanskrit {
   color: var(--muted);
-  font-style: italic;
-  margin: 2px 0 8px;
+  font: italic 1rem var(--serif);
+  margin: 4px 0 12px;
 }
 
 .badge {
   display: inline-block;
-  padding: 3px 12px;
+  padding: 4px 14px;
   border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
+  border: 1px solid var(--accent);
+  color: var(--accent);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 .timer {
   position: relative;
-  width: 180px;
-  height: 180px;
-  margin: 16px auto 8px;
+  width: 190px;
+  height: 190px;
+  margin: 20px auto 10px;
 }
 
 .timer svg {
@@ -347,7 +449,7 @@ details summary {
 
 .timer circle {
   fill: none;
-  stroke-width: 7;
+  stroke-width: 5;
 }
 
 .timer .track {
@@ -372,24 +474,25 @@ details summary {
 }
 
 #timer-text {
-  font-size: 2.4rem;
-  font-weight: 700;
+  font: 500 2.6rem var(--serif);
   font-variant-numeric: tabular-nums;
   position: relative;
 }
 
 #timer-label {
   color: var(--muted);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
   position: relative;
 }
 
 /* Respiración: 4 s inhalar, 6 s exhalar. */
 .breath {
   position: absolute;
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--sun-1) 0%, transparent 70%);
   animation: breathe 10s ease-in-out infinite;
 }
 
@@ -410,12 +513,14 @@ details summary {
 
 .caption {
   min-height: 3em;
-  font-size: 1.1rem;
-  margin: 8px 0;
+  font: 1.2rem / 1.45 var(--serif);
+  margin: 10px 0;
 }
 
 .caption.coach {
   color: var(--warn);
+  font-family: var(--sans);
+  font-size: 1.05rem;
   font-weight: 600;
 }
 
@@ -427,14 +532,21 @@ details summary {
   color: var(--muted);
   font-size: 0.9rem;
   margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
 }
 
 .progress {
-  height: 6px;
-  border-radius: 3px;
+  max-width: 520px;
+  height: 4px;
+  border-radius: 2px;
   background: var(--border);
-  margin-top: 18px;
+  margin: 24px auto 0;
   overflow: hidden;
+}
+
+.with-camera + .progress {
+  max-width: none;
 }
 
 #progress-bar {
@@ -447,8 +559,8 @@ details summary {
 .elapsed {
   text-align: center;
   color: var(--muted);
-  font-size: 0.85rem;
-  margin: 6px 0 0;
+  font-size: 0.875rem;
+  margin: 8px 0 0;
   font-variant-numeric: tabular-nums;
 }
 
@@ -456,24 +568,46 @@ details summary {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 14px;
+  margin-top: 16px;
   flex-wrap: wrap;
+}
+
+#pause {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  padding-inline: 22px;
+}
+
+#pause:hover {
+  background: var(--accent-strong);
 }
 
 /* ── Resumen ────────────────────────────────────── */
 
 .done {
+  max-width: 520px;
+  margin: 24px auto 0;
+  padding: 64px 28px 36px;
   text-align: center;
-  padding-top: 40px;
+  background: var(--sage-soft);
+  border: 1px solid var(--border);
+  border-radius: 240px 240px 24px 24px;
 }
 
 .done-icon {
-  font-size: 3.5rem;
-  margin: 0;
+  font-size: 3rem;
+  margin: 0 0 8px;
+}
+
+#done h2 {
+  font: 500 2.2rem var(--serif);
 }
 
 .summary {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
   margin: 24px 0 8px;
@@ -482,60 +616,39 @@ details summary {
 .summary div {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 16px;
   padding: 14px 18px;
   min-width: 96px;
 }
 
 .summary dt {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
 }
 
 .summary dd {
   margin: 4px 0 0;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font: 500 2rem var(--serif);
   color: var(--accent);
 }
 
-/* Shared visual language for configuration, practice and completion. */
-:root { --ok: #377448; --warn: #94601e; --danger: #a23e35; }
-@media (prefers-color-scheme: dark) { :root { --ok: #a2cf9b; --warn: #edbe7b; --danger: #f4aaa1; } }
-#setup { max-width: 980px; padding-top: 28px; }
-.top { margin-bottom: 30px; }
-.back { display: inline-block; padding: 8px 0; }
-.setup-eyebrow { font-size: .65rem; letter-spacing: .17em; color: var(--accent); margin: 30px 0 12px; }
-h1 { font: 500 clamp(2rem,5vw,3.2rem)/1.15 var(--serif); color: var(--text); letter-spacing: -.035em; }
-.setup-intro { color: var(--muted); margin: 14px 0; }
-.stats { font-size: .8rem; color: var(--accent); }
-.setup-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
-.card { padding: 24px; margin-bottom: 0; box-shadow: none; min-width: 0; }
-.card h2 { font-size: 1rem; font-weight: 500; margin-bottom: 20px; }
-.card-number { font: italic 1.2rem var(--serif); color: var(--accent); margin-right: 8px; }
-.chips { gap: 8px; }
-.chips button { min-height: 44px; padding: 10px 15px; font-size: .85rem; }
-button,.button { min-height: 44px; }
-.chips button:hover { border-color: var(--accent); }
-.chips button[aria-pressed='true'] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--accent); }
-.hint { line-height: 1.6; font-size: .82rem; }
-.range { font-size: .85rem; margin-top: 20px; }
-.range input { min-width: 0; }
-select { min-height: 44px; text-overflow: ellipsis; }
-.switch { font-size: .9rem; margin-bottom: 12px; }
-.switch input { flex-shrink: 0; }
-.class-overview { margin-top: 20px; background: var(--sage-soft); }
-.class-overview h2 { font: 1.5rem var(--serif); margin-bottom: 10px; }
-.big { margin-top: 20px; font-size: 1rem; }
-.pose-card { padding: 32px 24px; }
-.pose-card h2,#done h2 { font: 500 2.2rem var(--serif); }
-#framing { padding-top: 40px; }
-#framing h2 { font: 500 2rem var(--serif); }
-.stage-badge { color: #fff; }
-.summary { flex-wrap: wrap; }
 @media (max-width: 640px) {
-  .setup-grid { grid-template-columns: 1fr; }
-  .card { padding: 20px; }
-  .screen { padding-inline: 20px; }
-  .summary div { min-width: 80px; padding: 14px 12px; }
+  .screen {
+    padding-inline: 20px;
+  }
+  .setup-grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    padding: 20px;
+  }
+  .pose-card,
+  .done {
+    border-radius: 180px 180px 20px 20px;
+    padding-inline: 20px;
+  }
+  .summary div {
+    min-width: 80px;
+    padding: 14px 12px;
+  }
 }
