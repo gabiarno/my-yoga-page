@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#fbf6ea" />
+    <meta name="theme-color" content="#f7f7ef" />
     <meta
       name="description"
       content="Clases de yoga guiadas por voz, con música relajante y corrección de postura con la cámara. Gratis, en español y sin registro."
@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./styles/home.css" />
   </head>
   <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <header class="nav">
       <a href="./" class="brand" aria-label="Mi Yoga, inicio">
         <svg viewBox="0 0 32 32" aria-hidden="true" class="brand-mark">
@@ -36,30 +37,30 @@
       <a href="./app/" class="btn btn-small">Empezar</a>
     </header>
 
-    <main>
+    <main id="contenido">
       <!-- ── Portada ─────────────────────────────────────── -->
       <section class="hero">
         <div class="hero-text">
-          <p class="eyebrow">Yoga guiado · en español · gratis</p>
-          <h1>Tu clase de yoga, <em>guiada por voz</em> y atenta a tu postura.</h1>
+          <p class="eyebrow">TU ESPACIO PARA VOLVER A TI</p>
+          <h1>Respira.<br />Muévete.<br /><em>Vuelve a ti.</em></h1>
           <p class="lead">
-            Elige cuánto tiempo tienes y apoya el móvil frente a ti. Te guiamos postura a postura con música
-            relajante, y la cámara te avisa cuando algo se puede alinear mejor.
+            Un momento de calma, a tu ritmo. Clases de yoga en español, guiadas por voz y adaptadas al tiempo que tienes. Con música suave y cámara opcional.
           </p>
           <div class="hero-actions">
-            <a href="./app/" class="btn">Empezar una clase</a>
+            <a href="./app/" class="btn">Encontrar mi momento <span aria-hidden="true">↗</span></a>
             <a href="#como-funciona" class="btn btn-ghost">Cómo funciona</a>
           </div>
           <ul class="hero-facts">
             <li>Sin registro</li>
             <li>De 10 a 60 minutos</li>
-            <li>Tu vídeo no sale de tu móvil</li>
+            <li>Cámara opcional</li>
           </ul>
           <p class="returning" id="returning" hidden></p>
         </div>
 
         <figure class="hero-art" aria-label="Ilustración: figura en la postura del Guerrero II con los puntos que detecta la cámara">
-          <svg viewBox="0 0 400 380" role="img">
+          <div class="art-heading"><span>UNA PRÁCTICA CONSCIENTE</span><span aria-hidden="true">✳</span></div>
+          <svg viewBox="0 0 400 380" role="img" aria-label="Demostración de los puntos de alineación en Guerrero II">
             <defs>
               <radialGradient id="sun" cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stop-color="var(--sun-1)" />
@@ -97,8 +98,11 @@
             «Muy bien, así. Rodilla sobre el tobillo.»
           </figcaption>
           <span class="bubble bubble-ok">✓ Buena alineación</span>
+          <div class="art-caption"><span>Guerrero II <small>Fuerza · equilibrio · presencia</small></span><span class="demo-label">Ilustración</span></div>
         </figure>
       </section>
+
+      <div class="practice-note"><span>Menos ruido. Más presente.</span><p>Una voz que acompaña. Un espacio para escucharte.</p></div>
 
       <!-- ── Funciones ───────────────────────────────────── -->
       <section class="features" aria-label="Qué incluye">
@@ -196,7 +200,7 @@
           <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
         </div>
         <div>
-          <h2>Tu cámara no sale de tu móvil</h2>
+          <h2>Tu práctica es solo tuya</h2>
           <p>
             La detección de la postura se hace dentro de tu navegador. No se graba nada, no se envía ningún vídeo y no
             necesitas crear una cuenta. Si prefieres no usar la cámara, puedes seguir la clase solo con la voz.
@@ -213,7 +217,7 @@
     </main>
 
     <footer class="footer">
-      <p>Hecho con calma por Gabi Arnó.</p>
+      <p>Mi Yoga · Hecho con calma por Gabi Arnó.</p>
       <p>
         <a href="./v1/">Versión anterior (2021)</a> ·
         <a href="https://github.com/gabiarno/my-yoga-page">Código en GitHub</a>

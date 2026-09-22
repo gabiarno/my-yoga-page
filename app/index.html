@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#fdfbe5" />
+    <meta name="theme-color" content="#f7f7ef" />
     <meta name="description" content="Clases de yoga guiadas por voz, con música relajante y corrección de postura con la cámara." />
     <title>Clase guiada de yoga</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" />
     <link rel="stylesheet" href="./style.css" />
     <script type="module" src="./src/main.ts"></script>
   </head>
@@ -14,13 +17,16 @@
     <main id="setup" class="screen">
       <header class="top">
         <a href="../" class="back">← Inicio</a>
-        <h1>Clase guiada de yoga</h1>
+        <p class="setup-eyebrow">UN MOMENTO SOLO PARA TI</p>
+        <h1>Tu práctica, a tu ritmo.</h1>
+        <p class="setup-intro">Elige cómo quieres sentir este momento. Nosotros ponemos la guía.</p>
         <p class="stats" id="stats"></p>
       </header>
 
+      <div class="setup-grid">
       <section class="card">
-        <h2>Duración</h2>
-        <div class="chips" id="duration" role="radiogroup" aria-label="Duración">
+        <h2><span class="card-number">01</span> ¿Cuánto tiempo tienes?</h2>
+        <div class="chips" id="duration" role="group" aria-label="Duración">
           <button data-value="10">10 min</button>
           <button data-value="20">20 min</button>
           <button data-value="30">30 min</button>
@@ -30,15 +36,15 @@
       </section>
 
       <section class="card">
-        <h2>Nivel</h2>
-        <div class="chips" id="level" role="radiogroup" aria-label="Nivel">
+        <h2><span class="card-number">02</span> Tu punto de partida</h2>
+        <div class="chips" id="level" role="group" aria-label="Nivel">
           <button data-value="1">Principiante</button>
           <button data-value="2">Intermedio</button>
         </div>
       </section>
 
       <section class="card">
-        <h2>¿Algo que cuidar?</h2>
+        <h2><span class="card-number">03</span> ¿Algo que cuidar?</h2>
         <p class="hint">Evitaremos las posturas que puedan molestarte.</p>
         <div class="chips" id="avoid" aria-label="Zonas a cuidar">
           <button data-value="knees">Rodillas</button>
@@ -49,7 +55,7 @@
       </section>
 
       <section class="card">
-        <h2>Cámara</h2>
+        <h2><span class="card-number">04</span> Un poco de ayuda</h2>
         <label class="switch">
           <input type="checkbox" id="camera" />
           <span>Corregir mi postura con la cámara</span>
@@ -58,8 +64,8 @@
       </section>
 
       <section class="card">
-        <h2>Música</h2>
-        <div class="chips" id="music" role="radiogroup" aria-label="Música">
+        <h2><span class="card-number">05</span> El sonido de tu práctica</h2>
+        <div class="chips" id="music" role="group" aria-label="Música">
           <button data-value="pad">Ambiente</button>
           <button data-value="bowls">Cuencos</button>
           <button data-value="file">Mi música…</button>
@@ -74,7 +80,7 @@
       </section>
 
       <section class="card">
-        <h2>Voz</h2>
+        <h2><span class="card-number">06</span> La voz que te acompaña</h2>
         <select id="voice" aria-label="Voz del narrador"></select>
         <label class="range">
           <span>Velocidad</span>
@@ -83,8 +89,9 @@
         <button id="test-voice" class="secondary">▶ Probar voz</button>
       </section>
 
-      <section class="card">
-        <h2>Tu clase</h2>
+      </div>
+      <section class="card class-overview">
+        <h2>Tu momento está preparado</h2>
         <p id="class-summary" class="hint"></p>
         <details>
           <summary>Ver posturas</summary>
