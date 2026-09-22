@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fdfbe5" />
+    <meta name="description" content="Clases de yoga guiadas por voz, con música relajante y corrección de postura con la cámara." />
+    <title>Clase guiada de yoga</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./src/main.ts"></script>
+  </head>
+  <body>
+    <!-- ── Configuración ─────────────────────────────── -->
+    <main id="setup" class="screen">
+      <header class="top">
+        <a href="../" class="back">← Inicio</a>
+        <h1>Clase guiada de yoga</h1>
+        <p class="stats" id="stats"></p>
+      </header>
+
+      <section class="card">
+        <h2>Duración</h2>
+        <div class="chips" id="duration" role="radiogroup" aria-label="Duración">
+          <button data-value="10">10 min</button>
+          <button data-value="20">20 min</button>
+          <button data-value="30">30 min</button>
+          <button data-value="45">45 min</button>
+          <button data-value="60">60 min</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Nivel</h2>
+        <div class="chips" id="level" role="radiogroup" aria-label="Nivel">
+          <button data-value="1">Principiante</button>
+          <button data-value="2">Intermedio</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>¿Algo que cuidar?</h2>
+        <p class="hint">Evitaremos las posturas que puedan molestarte.</p>
+        <div class="chips" id="avoid" aria-label="Zonas a cuidar">
+          <button data-value="knees">Rodillas</button>
+          <button data-value="lowback">Zona lumbar</button>
+          <button data-value="wrists">Muñecas</button>
+          <button data-value="balance">Equilibrio</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Cámara</h2>
+        <label class="switch">
+          <input type="checkbox" id="camera" />
+          <span>Corregir mi postura con la cámara</span>
+        </label>
+        <p class="hint">🔒 El vídeo se analiza en tu dispositivo y nunca se envía a ningún sitio.</p>
+      </section>
+
+      <section class="card">
+        <h2>Música</h2>
+        <div class="chips" id="music" role="radiogroup" aria-label="Música">
+          <button data-value="pad">Ambiente</button>
+          <button data-value="bowls">Cuencos</button>
+          <button data-value="file">Mi música…</button>
+          <button data-value="none">Sin música</button>
+        </div>
+        <input type="file" id="music-file" accept="audio/*" hidden />
+        <p class="hint" id="music-file-name" hidden></p>
+        <label class="range">
+          <span>Volumen</span>
+          <input type="range" id="music-volume" min="0" max="1" step="0.05" />
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Voz</h2>
+        <select id="voice" aria-label="Voz del narrador"></select>
+        <label class="range">
+          <span>Velocidad</span>
+          <input type="range" id="rate" min="0.7" max="1.2" step="0.05" />
+        </label>
+        <button id="test-voice" class="secondary">▶ Probar voz</button>
+      </section>
+
+      <section class="card">
+        <h2>Tu clase</h2>
+        <p id="class-summary" class="hint"></p>
+        <details>
+          <summary>Ver posturas</summary>
+          <ol id="preview" class="preview"></ol>
+        </details>
+      </section>
+
+      <button id="start" class="primary big">Empezar clase</button>
+      <p class="disclaimer">
+        Esta app no sustituye a un profesional. Escucha a tu cuerpo, no fuerces y consulta con un médico si
+        tienes lesiones o dudas.
+      </p>
+    </main>
+
+    <!-- ── Encuadre ───────────────────────────────────── -->
+    <main id="framing" class="screen" hidden>
+      <h2>Colócate frente a la cámara</h2>
+      <p class="hint">
+        Apoya el móvil o el portátil a unos 2–3 metros, a la altura de la cadera, y ponte de pie en el centro de la
+        esterilla.
+      </p>
+      <div id="framing-slot" class="slot">
+        <div id="stage" class="stage">
+          <video id="video" playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <span id="stage-badge" class="stage-badge" hidden></span>
+        </div>
+      </div>
+      <p id="framing-msg" class="status">Preparando la cámara…</p>
+      <div class="row">
+        <button id="framing-continue" class="primary" disabled>Empezar la clase</button>
+        <button id="framing-skip" class="link">Continuar sin cámara</button>
+      </div>
+    </main>
+
+    <!-- ── Práctica ───────────────────────────────────── -->
+    <main id="practice" class="screen" hidden>
+      <div class="practice">
+        <div id="practice-slot" class="slot"></div>
+        <section class="pose-card">
+          <p class="block-label" id="block-label"></p>
+          <h2 id="pose-name">Preparándonos…</h2>
+          <p class="sanskrit" id="pose-sanskrit"></p>
+          <span class="badge" id="pose-side" hidden></span>
+          <div class="timer" aria-live="off">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="track" cx="60" cy="60" r="52" />
+              <circle class="ring" id="timer-ring" cx="60" cy="60" r="52" />
+            </svg>
+            <div class="timer-center">
+              <div id="breath" class="breath" hidden></div>
+              <span id="timer-text">—</span>
+              <small id="timer-label"></small>
+            </div>
+          </div>
+          <p class="caption" id="caption" aria-live="polite"></p>
+          <p class="next" id="next"></p>
+        </section>
+      </div>
+      <div class="progress" aria-label="Progreso de la clase"><div id="progress-bar"></div></div>
+      <p class="elapsed" id="elapsed"></p>
+      <div class="controls">
+        <button id="pause" class="secondary">⏸ Pausa</button>
+        <button id="skip" class="secondary">⏭ Siguiente</button>
+        <button id="stop" class="secondary danger">⏹ Terminar</button>
+      </div>
+      <label class="range compact">
+        <span>🎵</span>
+        <input type="range" id="practice-volume" min="0" max="1" step="0.05" aria-label="Volumen de la música" />
+      </label>
+    </main>
+
+    <!-- ── Resumen ────────────────────────────────────── -->
+    <main id="done" class="screen" hidden>
+      <div class="done">
+        <p class="done-icon">🙏</p>
+        <h2 id="done-title">¡Clase completada!</h2>
+        <dl class="summary">
+          <div><dt>Minutos</dt><dd id="done-minutes"></dd></div>
+          <div><dt>Posturas</dt><dd id="done-poses"></dd></div>
+          <div><dt>Correcciones</dt><dd id="done-corrections"></dd></div>
+        </dl>
+        <p class="hint" id="done-streak"></p>
+        <div class="row">
+          <button id="again" class="primary">Otra clase</button>
+          <a href="../" class="button secondary">Volver al inicio</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

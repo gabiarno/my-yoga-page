@@ -62,3 +62,20 @@ p a{
   text-align: center;
   font-weight: bold;
 }
+.cta-wrap {
+  text-align: center;
+  margin: 1em 0 2em;
+}
+.cta {
+  display: inline-block;
+  padding: 0.8em 1.6em;
+  border-radius: 999px;
+  background-color: rgb(211, 130, 41);
+  color: white;
+  font-size: 1.3em;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.cta:hover {
+  background-color: rgb(180, 105, 25);
+}
